@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SZLogistics", "SZLogistics\SZLogistics.csproj", "{C55848DC-BB3F-4707-91FD-01DF888A703C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A3F3C02-1FD2-44A1-8A5B-388D4B46F8F3} = {5A3F3C02-1FD2-44A1-8A5B-388D4B46F8F3}
+		{119D0626-838D-445A-8A3F-0E700E1A6181} = {119D0626-838D-445A-8A3F-0E700E1A6181}
+		{DCA4F6E2-05EB-478C-99DC-6B7337C1E179} = {DCA4F6E2-05EB-478C-99DC-6B7337C1E179}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SZLogistics.Tests", "SZLogistics.Tests\SZLogistics.Tests.csproj", "{665394C5-A6CD-4D06-ABE3-49F494AABA81}"
 EndProject

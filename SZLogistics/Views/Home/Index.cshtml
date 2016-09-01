@@ -1,31 +1,62 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "SZLogistics-采购信息管理系统";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div>
+    @*Loading Js and Css*@
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(
+            function () {
+                $("#btnLogin").click(function ()
+                {
+                    var strUserName = $('#txt_UserName').val();
+                    var strPassword = $('#txt_Password').val();
+                    var data =
+                    {
+                        strUserName: strUserName,
+                        strPassword: strPassword
+                    }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+                    $.post("/Home/LoginSys",data, function(returnData) 
+                    {
+                        alert(returnData.RetStatus);
+                        if (returnData.RetStatus == "成功")
+                        {
+                            window.location.href = "/MainFrm/MainFrm";
+                        }
+                    });
+            
+                });
+
+                    //$.ajax({
+                    //    type: 'post',
+                    //    url: '/Home/LoginSys',//路径为添加方法
+                    //    data: 'strUserName=' + strUserName + '&strPassword=' + strPassword,//参数的个数和名字要和方法的名字保持一致
+                    //    success: function (ReturnValue)//返回的是Json类型的
+                    //    {
+                    //        $('#window').dialog("close");
+                    //        //判断是否成功
+                    //        if (ReturnValue.result == "true") {
+                    //            $('#btn_close').click();
+                    //            alert('恭喜你，修改成功！');
+                    //        } else {
+                    //            alert('抱歉，修改失败！');
+                    //        }
+                    //    }
+                    //});
+
+           });
+    </script>
+</div>
+<div>
+    <label>用户名: </label> <input id="txt_UserName" type="text" value=""/>
+    
+</div>
+<div>
+    <label>密  码: </label> <input id="txt_Password" type="password" value="" />
+</div>
+<div>
+    <span id="btnLogin">登录</span><span id="btnReset">重置</span>
 </div>

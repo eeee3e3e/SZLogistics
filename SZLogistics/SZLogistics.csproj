@@ -169,6 +169,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelReportController.cs" />
+    <Compile Include="Controllers\MainFrmController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -234,6 +236,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\HotelReport\HotelReport.cshtml" />
+    <Content Include="Views\MainFrm\MainFrm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +249,23 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SZLogisiticsBLL\SZLogisiticsBLL.csproj">
+      <Project>{119d0626-838d-445a-8a3f-0e700e1a6181}</Project>
+      <Name>SZLogisiticsBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SZLogisiticsDTO\SZLogisiticsDTO.csproj">
+      <Project>{dca4f6e2-05eb-478c-99dc-6b7337c1e179}</Project>
+      <Name>SZLogisiticsDTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SZLogistics_Common\SZLogistics_Common.csproj">
+      <Project>{5a3f3c02-1fd2-44a1-8a5b-388d4b46f8f3}</Project>
+      <Name>SZLogistics_Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

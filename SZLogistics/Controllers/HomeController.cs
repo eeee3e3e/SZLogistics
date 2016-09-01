@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SZLogisiticsDTO.DataRet;
 
 namespace SZLogistics.Controllers
 {
@@ -11,6 +12,19 @@ namespace SZLogistics.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult LoginSys(string strUserName, string strPassword)
+        {
+
+            ReturnValue rv = new ReturnValue();
+            SZLogisiticsDTO.SZ_BuyerEntities  SzBuyerEntities= new SZLogisiticsDTO.SZ_BuyerEntities();
+            var cls = (from UsObj in SzBuyerEntities.T_HUserInfo
+                       where UsObj.F_UserName == strUserName 
+                       select UsObj);
+            rv.RetStatus = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
+            rv.RetValue = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
+            return Json(rv,JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()
