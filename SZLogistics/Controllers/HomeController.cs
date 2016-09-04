@@ -18,11 +18,10 @@ namespace SZLogistics.Controllers
         {
 
             ReturnValue<string> rv = new ReturnValue<string>();
-            SZLogisiticsDTO.SZ_BuyerEntities  SzBuyerEntities= new SZLogisiticsDTO.SZ_BuyerEntities();
+            SZLogisiticsDTO.SZLogisticsEFContainer SzBuyerEntities = new SZLogisiticsDTO.SZLogisticsEFContainer();
             var cls = (from UsObj in SzBuyerEntities.T_HUserInfo
                        where UsObj.F_UserName == strUserName 
                        select UsObj);
-            rv.data = "Status:OK";
             rv.RetStatus = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
             rv.RetValue = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
             return Json(rv,JsonRequestBehavior.AllowGet);

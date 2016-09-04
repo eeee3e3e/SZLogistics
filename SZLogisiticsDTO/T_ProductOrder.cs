@@ -15,6 +15,7 @@ namespace SZLogisiticsDTO
     public partial class T_ProductOrder
     {
         public int F_ID { get; set; }
+        public string F_ProductName { get; set; }
         public string F_Model { get; set; }
         public Nullable<int> F_UnitID { get; set; }
         public Nullable<decimal> F_Price { get; set; }
@@ -24,7 +25,7 @@ namespace SZLogisiticsDTO
         public string F_Remark { get; set; }
         public Nullable<int> F_ProviderID { get; set; }
         public Nullable<int> F_HotelID { get; set; }
-        public string F_ProductName { get; set; }
+        public string F_Status { get; set; }
     
         public virtual T_HotelInfo T_HotelInfo { get; set; }
         public virtual T_ProviderInfo T_ProviderInfo { get; set; }

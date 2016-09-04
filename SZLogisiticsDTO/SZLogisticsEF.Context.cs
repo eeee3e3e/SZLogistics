@@ -13,10 +13,10 @@ namespace SZLogisiticsDTO
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SZ_BuyerEntities : DbContext
+    public partial class SZLogisticsEFContainer : DbContext
     {
-        public SZ_BuyerEntities()
-            : base("name=SZ_BuyerEntities")
+        public SZLogisticsEFContainer()
+            : base("name=SZLogisticsEFContainer")
         {
         }
     
@@ -25,6 +25,7 @@ namespace SZLogisiticsDTO
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<T_HotelInfo> T_HotelInfo { get; set; }
         public virtual DbSet<T_HUserInfo> T_HUserInfo { get; set; }
         public virtual DbSet<T_HUserType> T_HUserType { get; set; }
@@ -33,6 +34,5 @@ namespace SZLogisiticsDTO
         public virtual DbSet<T_PUserInfo> T_PUserInfo { get; set; }
         public virtual DbSet<T_PUserType> T_PUserType { get; set; }
         public virtual DbSet<T_Unit> T_Unit { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

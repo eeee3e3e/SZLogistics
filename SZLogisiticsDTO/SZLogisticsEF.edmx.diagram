@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0bfeec7e2dc64206985d6794d1c16310" Name="Diagram1">
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_HotelInfo" Width="1.5" PointX="8.625" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_HUserInfo" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_HUserType" Width="1.5" PointX="8.625" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_ProductOrder" Width="1.5" PointX="3.875" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_ProviderInfo" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_PUserInfo" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_PUserType" Width="1.5" PointX="8.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.T_Unit" Width="1.5" PointX="1.25" PointY="4.5" IsExpanded="true" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_ProductOrder_T_HotelInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_UserInfo_T_HotelInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_UserInfo_T_UserType" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_ProductOrder_T_ProviderInfo1" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_ProductOrder_T_Unit" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_PUserInfo_T_ProviderInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SZ_BuyerModel.FK_T_PUserInfo_T_PUserType" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SZ_BuyerModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" />
+      <Diagram DiagramId="682d5282da5f4bc79f28669dd27d67e7" Name="Diagram1" >
+        <EntityTypeShape EntityType="SZLogisticsEF.sysdiagram" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_HotelInfo" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_HUserInfo" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_HUserType" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_ProductOrder" Width="1.5" PointX="6" PointY="3.125" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_ProviderInfo" Width="1.5" PointX="3.75" PointY="7" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_PUserInfo" Width="1.5" PointX="6" PointY="7.875" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_PUserType" Width="1.5" PointX="3.75" PointY="10.25" />
+        <EntityTypeShape EntityType="SZLogisticsEF.T_Unit" Width="1.5" PointX="3.75" PointY="0.75" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_ProductOrder_T_HotelInfo" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_UserInfo_T_HotelInfo" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_UserInfo_T_UserType" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_ProductOrder_T_ProviderInfo1" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_ProductOrder_T_Unit" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_PUserInfo_T_ProviderInfo" />
+        <AssociationConnector Association="SZLogisticsEF.FK_T_PUserInfo_T_PUserType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

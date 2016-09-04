@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SZ_BuyerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SZLogisticsEF.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -55,6 +55,7 @@
           <Property Name="F_Remark" Type="varchar" MaxLength="500" />
           <Property Name="F_ProviderID" Type="int" />
           <Property Name="F_HotelID" Type="int" />
+          <Property Name="F_Status" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="T_ProviderInfo">
           <Key>
@@ -172,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SZ_BuyerModelStoreContainer">
+        <EntityContainer Name="SZLogisticsEFStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_HotelInfo" EntityType="Self.T_HotelInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_HUserInfo" EntityType="Self.T_HUserInfo" Schema="dbo" store:Type="Tables" />
@@ -214,216 +215,45 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SZ_BuyerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="T_HotelInfo">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_Level" Type="Int32" />
-          <NavigationProperty Name="T_ProductOrder" Relationship="Self.FK_T_ProductOrder_T_HotelInfo" FromRole="T_HotelInfo" ToRole="T_ProductOrder" />
-          <NavigationProperty Name="T_HUserInfo" Relationship="Self.FK_T_UserInfo_T_HotelInfo" FromRole="T_HotelInfo" ToRole="T_HUserInfo" />
-        </EntityType>
-        <EntityType Name="T_HUserInfo">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_UserTypeID" Type="Int32" />
-          <Property Name="F_HotelID" Type="Int32" />
-          <NavigationProperty Name="T_HotelInfo" Relationship="Self.FK_T_UserInfo_T_HotelInfo" FromRole="T_HUserInfo" ToRole="T_HotelInfo" />
-          <NavigationProperty Name="T_HUserType" Relationship="Self.FK_T_UserInfo_T_UserType" FromRole="T_HUserInfo" ToRole="T_HUserType" />
-        </EntityType>
-        <EntityType Name="T_HUserType">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_HUserInfo" Relationship="Self.FK_T_UserInfo_T_UserType" FromRole="T_HUserType" ToRole="T_HUserInfo" />
-        </EntityType>
-        <EntityType Name="T_ProductOrder">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_UnitID" Type="Int32" />
-          <Property Name="F_Price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="F_Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_ImportDate" Type="DateTime" Precision="0" />
-          <Property Name="DeliveryPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="F_ProviderID" Type="Int32" />
-          <Property Name="F_HotelID" Type="Int32" />
-          <NavigationProperty Name="T_HotelInfo" Relationship="Self.FK_T_ProductOrder_T_HotelInfo" FromRole="T_ProductOrder" ToRole="T_HotelInfo" />
-          <NavigationProperty Name="T_ProviderInfo" Relationship="Self.FK_T_ProductOrder_T_ProviderInfo1" FromRole="T_ProductOrder" ToRole="T_ProviderInfo" />
-          <NavigationProperty Name="T_Unit" Relationship="Self.FK_T_ProductOrder_T_Unit" FromRole="T_ProductOrder" ToRole="T_Unit" />
-          <Property Name="F_ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="T_ProviderInfo">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_Scope" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_ProductOrder" Relationship="Self.FK_T_ProductOrder_T_ProviderInfo1" FromRole="T_ProviderInfo" ToRole="T_ProductOrder" />
-          <NavigationProperty Name="T_PUserInfo" Relationship="Self.FK_T_PUserInfo_T_ProviderInfo" FromRole="T_ProviderInfo" ToRole="T_PUserInfo" />
-        </EntityType>
-        <EntityType Name="T_PUserInfo">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_UserTypeID" Type="Int32" />
-          <Property Name="F_ProviderID" Type="Int32" />
-          <NavigationProperty Name="T_ProviderInfo" Relationship="Self.FK_T_PUserInfo_T_ProviderInfo" FromRole="T_PUserInfo" ToRole="T_ProviderInfo" />
-          <NavigationProperty Name="T_PUserType" Relationship="Self.FK_T_PUserInfo_T_PUserType" FromRole="T_PUserInfo" ToRole="T_PUserType" />
-        </EntityType>
-        <EntityType Name="T_PUserType">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_PUserInfo" Relationship="Self.FK_T_PUserInfo_T_PUserType" FromRole="T_PUserType" ToRole="T_PUserInfo" />
-        </EntityType>
-        <EntityType Name="T_Unit">
-          <Key>
-            <PropertyRef Name="F_ID" />
-          </Key>
-          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="T_ProductOrder" Relationship="Self.FK_T_ProductOrder_T_Unit" FromRole="T_Unit" ToRole="T_ProductOrder" />
-        </EntityType>
-        <Association Name="FK_T_ProductOrder_T_HotelInfo">
-          <End Role="T_HotelInfo" Type="Self.T_HotelInfo" Multiplicity="0..1" />
-          <End Role="T_ProductOrder" Type="Self.T_ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_HotelInfo">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_ProductOrder">
-              <PropertyRef Name="F_HotelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_UserInfo_T_HotelInfo">
-          <End Role="T_HotelInfo" Type="Self.T_HotelInfo" Multiplicity="0..1" />
-          <End Role="T_HUserInfo" Type="Self.T_HUserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_HotelInfo">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_HUserInfo">
-              <PropertyRef Name="F_HotelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_UserInfo_T_UserType">
-          <End Role="T_HUserType" Type="Self.T_HUserType" Multiplicity="0..1" />
-          <End Role="T_HUserInfo" Type="Self.T_HUserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_HUserType">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_HUserInfo">
-              <PropertyRef Name="F_UserTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_ProductOrder_T_ProviderInfo1">
-          <End Role="T_ProviderInfo" Type="Self.T_ProviderInfo" Multiplicity="0..1" />
-          <End Role="T_ProductOrder" Type="Self.T_ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_ProviderInfo">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_ProductOrder">
-              <PropertyRef Name="F_ProviderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_ProductOrder_T_Unit">
-          <End Role="T_Unit" Type="Self.T_Unit" Multiplicity="0..1" />
-          <End Role="T_ProductOrder" Type="Self.T_ProductOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_Unit">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_ProductOrder">
-              <PropertyRef Name="F_UnitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_PUserInfo_T_ProviderInfo">
-          <End Role="T_ProviderInfo" Type="Self.T_ProviderInfo" Multiplicity="0..1" />
-          <End Role="T_PUserInfo" Type="Self.T_PUserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_ProviderInfo">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_PUserInfo">
-              <PropertyRef Name="F_ProviderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_T_PUserInfo_T_PUserType">
-          <End Role="T_PUserType" Type="Self.T_PUserType" Multiplicity="0..1" />
-          <End Role="T_PUserInfo" Type="Self.T_PUserInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_PUserType">
-              <PropertyRef Name="F_ID" />
-            </Principal>
-            <Dependent Role="T_PUserInfo">
-              <PropertyRef Name="F_UserTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SZ_BuyerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="T_HotelInfo" EntityType="Self.T_HotelInfo" />
-          <EntitySet Name="T_HUserInfo" EntityType="Self.T_HUserInfo" />
-          <EntitySet Name="T_HUserType" EntityType="Self.T_HUserType" />
-          <EntitySet Name="T_ProductOrder" EntityType="Self.T_ProductOrder" />
-          <EntitySet Name="T_ProviderInfo" EntityType="Self.T_ProviderInfo" />
-          <EntitySet Name="T_PUserInfo" EntityType="Self.T_PUserInfo" />
-          <EntitySet Name="T_PUserType" EntityType="Self.T_PUserType" />
-          <EntitySet Name="T_Unit" EntityType="Self.T_Unit" />
-          <AssociationSet Name="FK_T_ProductOrder_T_HotelInfo" Association="Self.FK_T_ProductOrder_T_HotelInfo">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SZLogisticsEF" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SZLogisticsEFContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="SZLogisticsEF.sysdiagram" />
+          <EntitySet Name="T_HotelInfo" EntityType="SZLogisticsEF.T_HotelInfo" />
+          <EntitySet Name="T_HUserInfo" EntityType="SZLogisticsEF.T_HUserInfo" />
+          <EntitySet Name="T_HUserType" EntityType="SZLogisticsEF.T_HUserType" />
+          <EntitySet Name="T_ProductOrder" EntityType="SZLogisticsEF.T_ProductOrder" />
+          <EntitySet Name="T_ProviderInfo" EntityType="SZLogisticsEF.T_ProviderInfo" />
+          <EntitySet Name="T_PUserInfo" EntityType="SZLogisticsEF.T_PUserInfo" />
+          <EntitySet Name="T_PUserType" EntityType="SZLogisticsEF.T_PUserType" />
+          <EntitySet Name="T_Unit" EntityType="SZLogisticsEF.T_Unit" />
+          <AssociationSet Name="FK_T_ProductOrder_T_HotelInfo" Association="SZLogisticsEF.FK_T_ProductOrder_T_HotelInfo">
             <End Role="T_HotelInfo" EntitySet="T_HotelInfo" />
             <End Role="T_ProductOrder" EntitySet="T_ProductOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_UserInfo_T_HotelInfo" Association="Self.FK_T_UserInfo_T_HotelInfo">
+          <AssociationSet Name="FK_T_UserInfo_T_HotelInfo" Association="SZLogisticsEF.FK_T_UserInfo_T_HotelInfo">
             <End Role="T_HotelInfo" EntitySet="T_HotelInfo" />
             <End Role="T_HUserInfo" EntitySet="T_HUserInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_UserInfo_T_UserType" Association="Self.FK_T_UserInfo_T_UserType">
+          <AssociationSet Name="FK_T_UserInfo_T_UserType" Association="SZLogisticsEF.FK_T_UserInfo_T_UserType">
             <End Role="T_HUserType" EntitySet="T_HUserType" />
             <End Role="T_HUserInfo" EntitySet="T_HUserInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_ProductOrder_T_ProviderInfo1" Association="Self.FK_T_ProductOrder_T_ProviderInfo1">
+          <AssociationSet Name="FK_T_ProductOrder_T_ProviderInfo1" Association="SZLogisticsEF.FK_T_ProductOrder_T_ProviderInfo1">
             <End Role="T_ProviderInfo" EntitySet="T_ProviderInfo" />
             <End Role="T_ProductOrder" EntitySet="T_ProductOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_ProductOrder_T_Unit" Association="Self.FK_T_ProductOrder_T_Unit">
+          <AssociationSet Name="FK_T_ProductOrder_T_Unit" Association="SZLogisticsEF.FK_T_ProductOrder_T_Unit">
             <End Role="T_Unit" EntitySet="T_Unit" />
             <End Role="T_ProductOrder" EntitySet="T_ProductOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_PUserInfo_T_ProviderInfo" Association="Self.FK_T_PUserInfo_T_ProviderInfo">
+          <AssociationSet Name="FK_T_PUserInfo_T_ProviderInfo" Association="SZLogisticsEF.FK_T_PUserInfo_T_ProviderInfo">
             <End Role="T_ProviderInfo" EntitySet="T_ProviderInfo" />
             <End Role="T_PUserInfo" EntitySet="T_PUserInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK_T_PUserInfo_T_PUserType" Association="Self.FK_T_PUserInfo_T_PUserType">
+          <AssociationSet Name="FK_T_PUserInfo_T_PUserType" Association="SZLogisticsEF.FK_T_PUserInfo_T_PUserType">
             <End Role="T_PUserType" EntitySet="T_PUserType" />
             <End Role="T_PUserInfo" EntitySet="T_PUserInfo" />
           </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="SZ_BuyerModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -435,95 +265,188 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="T_HotelInfo">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_Level" Type="Int32" />
+          <NavigationProperty Name="T_ProductOrder" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_HotelInfo" FromRole="T_HotelInfo" ToRole="T_ProductOrder" />
+          <NavigationProperty Name="T_HUserInfo" Relationship="SZLogisticsEF.FK_T_UserInfo_T_HotelInfo" FromRole="T_HotelInfo" ToRole="T_HUserInfo" />
+        </EntityType>
+        <EntityType Name="T_HUserInfo">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_UserTypeID" Type="Int32" />
+          <Property Name="F_HotelID" Type="Int32" />
+          <NavigationProperty Name="T_HotelInfo" Relationship="SZLogisticsEF.FK_T_UserInfo_T_HotelInfo" FromRole="T_HUserInfo" ToRole="T_HotelInfo" />
+          <NavigationProperty Name="T_HUserType" Relationship="SZLogisticsEF.FK_T_UserInfo_T_UserType" FromRole="T_HUserInfo" ToRole="T_HUserType" />
+        </EntityType>
+        <EntityType Name="T_HUserType">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_HUserInfo" Relationship="SZLogisticsEF.FK_T_UserInfo_T_UserType" FromRole="T_HUserType" ToRole="T_HUserInfo" />
+        </EntityType>
+        <EntityType Name="T_ProductOrder">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="F_Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_UnitID" Type="Int32" />
+          <Property Name="F_Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="F_Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_ImportDate" Type="DateTime" Precision="0" />
+          <Property Name="DeliveryPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="F_ProviderID" Type="Int32" />
+          <Property Name="F_HotelID" Type="Int32" />
+          <NavigationProperty Name="T_HotelInfo" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_HotelInfo" FromRole="T_ProductOrder" ToRole="T_HotelInfo" />
+          <NavigationProperty Name="T_ProviderInfo" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_ProviderInfo1" FromRole="T_ProductOrder" ToRole="T_ProviderInfo" />
+          <NavigationProperty Name="T_Unit" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_Unit" FromRole="T_ProductOrder" ToRole="T_Unit" />
+          <Property Name="F_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="T_ProviderInfo">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_Scope" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_ProductOrder" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_ProviderInfo1" FromRole="T_ProviderInfo" ToRole="T_ProductOrder" />
+          <NavigationProperty Name="T_PUserInfo" Relationship="SZLogisticsEF.FK_T_PUserInfo_T_ProviderInfo" FromRole="T_ProviderInfo" ToRole="T_PUserInfo" />
+        </EntityType>
+        <EntityType Name="T_PUserInfo">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_UserTypeID" Type="Int32" />
+          <Property Name="F_ProviderID" Type="Int32" />
+          <NavigationProperty Name="T_ProviderInfo" Relationship="SZLogisticsEF.FK_T_PUserInfo_T_ProviderInfo" FromRole="T_PUserInfo" ToRole="T_ProviderInfo" />
+          <NavigationProperty Name="T_PUserType" Relationship="SZLogisticsEF.FK_T_PUserInfo_T_PUserType" FromRole="T_PUserInfo" ToRole="T_PUserType" />
+        </EntityType>
+        <EntityType Name="T_PUserType">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_PUserInfo" Relationship="SZLogisticsEF.FK_T_PUserInfo_T_PUserType" FromRole="T_PUserType" ToRole="T_PUserInfo" />
+        </EntityType>
+        <EntityType Name="T_Unit">
+          <Key>
+            <PropertyRef Name="F_ID" />
+          </Key>
+          <Property Name="F_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_ProductOrder" Relationship="SZLogisticsEF.FK_T_ProductOrder_T_Unit" FromRole="T_Unit" ToRole="T_ProductOrder" />
+        </EntityType>
+        <Association Name="FK_T_ProductOrder_T_HotelInfo">
+          <End Type="SZLogisticsEF.T_HotelInfo" Role="T_HotelInfo" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_ProductOrder" Role="T_ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_HotelInfo">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_ProductOrder">
+              <PropertyRef Name="F_HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_UserInfo_T_HotelInfo">
+          <End Type="SZLogisticsEF.T_HotelInfo" Role="T_HotelInfo" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_HUserInfo" Role="T_HUserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_HotelInfo">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_HUserInfo">
+              <PropertyRef Name="F_HotelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_UserInfo_T_UserType">
+          <End Type="SZLogisticsEF.T_HUserType" Role="T_HUserType" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_HUserInfo" Role="T_HUserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_HUserType">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_HUserInfo">
+              <PropertyRef Name="F_UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ProductOrder_T_ProviderInfo1">
+          <End Type="SZLogisticsEF.T_ProviderInfo" Role="T_ProviderInfo" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_ProductOrder" Role="T_ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ProviderInfo">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_ProductOrder">
+              <PropertyRef Name="F_ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_ProductOrder_T_Unit">
+          <End Type="SZLogisticsEF.T_Unit" Role="T_Unit" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_ProductOrder" Role="T_ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_Unit">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_ProductOrder">
+              <PropertyRef Name="F_UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PUserInfo_T_ProviderInfo">
+          <End Type="SZLogisticsEF.T_ProviderInfo" Role="T_ProviderInfo" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_PUserInfo" Role="T_PUserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_ProviderInfo">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_PUserInfo">
+              <PropertyRef Name="F_ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_PUserInfo_T_PUserType">
+          <End Type="SZLogisticsEF.T_PUserType" Role="T_PUserType" Multiplicity="0..1" />
+          <End Type="SZLogisticsEF.T_PUserInfo" Role="T_PUserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_PUserType">
+              <PropertyRef Name="F_ID" />
+            </Principal>
+            <Dependent Role="T_PUserInfo">
+              <PropertyRef Name="F_UserTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SZ_BuyerModelStoreContainer" CdmEntityContainer="SZ_BuyerEntities">
-          <EntitySetMapping Name="T_HotelInfo">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_HotelInfo">
-              <MappingFragment StoreEntitySet="T_HotelInfo">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-                <ScalarProperty Name="F_Level" ColumnName="F_Level" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_HUserInfo">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_HUserInfo">
-              <MappingFragment StoreEntitySet="T_HUserInfo">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_UserName" ColumnName="F_UserName" />
-                <ScalarProperty Name="F_Password" ColumnName="F_Password" />
-                <ScalarProperty Name="F_UserTypeID" ColumnName="F_UserTypeID" />
-                <ScalarProperty Name="F_HotelID" ColumnName="F_HotelID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_HUserType">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_HUserType">
-              <MappingFragment StoreEntitySet="T_HUserType">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_ProductOrder">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_ProductOrder">
-              <MappingFragment StoreEntitySet="T_ProductOrder">
-                <ScalarProperty Name="F_ProductName" ColumnName="F_ProductName" />
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Model" ColumnName="F_Model" />
-                <ScalarProperty Name="F_UnitID" ColumnName="F_UnitID" />
-                <ScalarProperty Name="F_Price" ColumnName="F_Price" />
-                <ScalarProperty Name="F_Brand" ColumnName="F_Brand" />
-                <ScalarProperty Name="F_ImportDate" ColumnName="F_ImportDate" />
-                <ScalarProperty Name="DeliveryPlace" ColumnName="DeliveryPlace" />
-                <ScalarProperty Name="F_Remark" ColumnName="F_Remark" />
-                <ScalarProperty Name="F_ProviderID" ColumnName="F_ProviderID" />
-                <ScalarProperty Name="F_HotelID" ColumnName="F_HotelID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_ProviderInfo">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_ProviderInfo">
-              <MappingFragment StoreEntitySet="T_ProviderInfo">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-                <ScalarProperty Name="F_Scope" ColumnName="F_Scope" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_PUserInfo">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_PUserInfo">
-              <MappingFragment StoreEntitySet="T_PUserInfo">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_UserName" ColumnName="F_UserName" />
-                <ScalarProperty Name="F_Password" ColumnName="F_Password" />
-                <ScalarProperty Name="F_UserTypeID" ColumnName="F_UserTypeID" />
-                <ScalarProperty Name="F_ProviderID" ColumnName="F_ProviderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_PUserType">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_PUserType">
-              <MappingFragment StoreEntitySet="T_PUserType">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="T_Unit">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.T_Unit">
-              <MappingFragment StoreEntitySet="T_Unit">
-                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
-                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="SZLogisticsEF" />
+        <Alias Key="Target" Value="SZLogisticsEF.Store" />
+        <EntityContainerMapping CdmEntityContainer="SZLogisticsEFContainer" StorageEntityContainer="SZLogisticsEFStoreContainer">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SZ_BuyerModel.sysdiagram">
+            <EntityTypeMapping TypeName="SZLogisticsEF.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="definition" ColumnName="definition" />
                 <ScalarProperty Name="version" ColumnName="version" />
@@ -533,27 +456,110 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="T_HotelInfo">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_HotelInfo">
+              <MappingFragment StoreEntitySet="T_HotelInfo">
+                <ScalarProperty Name="F_Level" ColumnName="F_Level" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_HUserInfo">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_HUserInfo">
+              <MappingFragment StoreEntitySet="T_HUserInfo">
+                <ScalarProperty Name="F_HotelID" ColumnName="F_HotelID" />
+                <ScalarProperty Name="F_UserTypeID" ColumnName="F_UserTypeID" />
+                <ScalarProperty Name="F_Password" ColumnName="F_Password" />
+                <ScalarProperty Name="F_UserName" ColumnName="F_UserName" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_HUserType">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_HUserType">
+              <MappingFragment StoreEntitySet="T_HUserType">
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_ProductOrder">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_ProductOrder">
+              <MappingFragment StoreEntitySet="T_ProductOrder">
+                <ScalarProperty Name="F_Status" ColumnName="F_Status" />
+                <ScalarProperty Name="F_HotelID" ColumnName="F_HotelID" />
+                <ScalarProperty Name="F_ProviderID" ColumnName="F_ProviderID" />
+                <ScalarProperty Name="F_Remark" ColumnName="F_Remark" />
+                <ScalarProperty Name="DeliveryPlace" ColumnName="DeliveryPlace" />
+                <ScalarProperty Name="F_ImportDate" ColumnName="F_ImportDate" />
+                <ScalarProperty Name="F_Brand" ColumnName="F_Brand" />
+                <ScalarProperty Name="F_Price" ColumnName="F_Price" />
+                <ScalarProperty Name="F_UnitID" ColumnName="F_UnitID" />
+                <ScalarProperty Name="F_Model" ColumnName="F_Model" />
+                <ScalarProperty Name="F_ProductName" ColumnName="F_ProductName" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_ProviderInfo">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_ProviderInfo">
+              <MappingFragment StoreEntitySet="T_ProviderInfo">
+                <ScalarProperty Name="F_Scope" ColumnName="F_Scope" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PUserInfo">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_PUserInfo">
+              <MappingFragment StoreEntitySet="T_PUserInfo">
+                <ScalarProperty Name="F_ProviderID" ColumnName="F_ProviderID" />
+                <ScalarProperty Name="F_UserTypeID" ColumnName="F_UserTypeID" />
+                <ScalarProperty Name="F_Password" ColumnName="F_Password" />
+                <ScalarProperty Name="F_UserName" ColumnName="F_UserName" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_PUserType">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_PUserType">
+              <MappingFragment StoreEntitySet="T_PUserType">
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Unit">
+            <EntityTypeMapping TypeName="SZLogisticsEF.T_Unit">
+              <MappingFragment StoreEntitySet="T_Unit">
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_ID" ColumnName="F_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
+    </edmx:Connection>
+    <edmx:Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
-    </Options>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
 </edmx:Edmx>

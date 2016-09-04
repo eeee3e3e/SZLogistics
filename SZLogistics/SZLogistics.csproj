@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HotelReportController.cs" />
     <Compile Include="Controllers\MainFrmController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProviderReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,10 +187,19 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSS\bootstrap-datepicker.css" />
+    <Content Include="CSS\bootstrap-datetimepicker.css" />
+    <Content Include="CSS\bootstrap-datetimepicker.min.css" />
+    <Content Include="CSS\bootstrap-responsive.css" />
+    <Content Include="CSS\bootstrap-theme.css" />
+    <Content Include="CSS\bootstrap-theme.min.css" />
+    <Content Include="CSS\bootstrap.css" />
+    <Content Include="CSS\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -200,6 +210,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="CSS\bootstrap-theme.css.map" />
+    <Content Include="CSS\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -208,11 +220,59 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ar.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.az.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.bg.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.bn.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ca.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.cs.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.da.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.de.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ee.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.el.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.es.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.fi.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.fr.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.he.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.hr.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.hu.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.hy.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.id.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.is.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.it.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ja.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ka.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ko.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.lt.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.lv.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ms.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.nb.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.nl.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.no.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.pl.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.pt-BR.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.pt.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ro.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.rs-latin.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.rs.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ru.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.sk.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.sl.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.sv.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.sw.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.th.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.tr.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.ua.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.uk.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.zh-CN.js" />
+    <Content Include="Scripts\locales\bootstrap-datetimepicker.zh-TW.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -248,9 +308,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\HotelReport\HotelReport.cshtml" />
     <Content Include="Views\MainFrm\MainFrm.cshtml" />
+    <Content Include="Views\ProviderReport\ProviderReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
