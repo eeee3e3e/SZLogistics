@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SZ_BuyerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SZ_BuyerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="T_HotelInfo">
           <Key>
             <PropertyRef Name="F_ID" />
@@ -35,6 +45,7 @@
             <PropertyRef Name="F_ID" />
           </Key>
           <Property Name="F_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_ProductName" Type="varchar" MaxLength="100" />
           <Property Name="F_Model" Type="varchar" MaxLength="50" />
           <Property Name="F_UnitID" Type="int" />
           <Property Name="F_Price" Type="decimal" Precision="18" Scale="0" />
@@ -162,6 +173,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SZ_BuyerModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_HotelInfo" EntityType="Self.T_HotelInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_HUserInfo" EntityType="Self.T_HUserInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_HUserType" EntityType="Self.T_HUserType" Schema="dbo" store:Type="Tables" />
@@ -199,8 +211,7 @@
             <End Role="T_HUserInfo" EntitySet="T_HUserInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SZ_BuyerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,6 +262,7 @@
           <NavigationProperty Name="T_HotelInfo" Relationship="Self.FK_T_ProductOrder_T_HotelInfo" FromRole="T_ProductOrder" ToRole="T_HotelInfo" />
           <NavigationProperty Name="T_ProviderInfo" Relationship="Self.FK_T_ProductOrder_T_ProviderInfo1" FromRole="T_ProductOrder" ToRole="T_ProviderInfo" />
           <NavigationProperty Name="T_Unit" Relationship="Self.FK_T_ProductOrder_T_Unit" FromRole="T_ProductOrder" ToRole="T_Unit" />
+          <Property Name="F_ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="T_ProviderInfo">
           <Key>
@@ -411,7 +423,18 @@
             <End Role="T_PUserType" EntitySet="T_PUserType" />
             <End Role="T_PUserInfo" EntitySet="T_PUserInfo" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="SZ_BuyerModel.sysdiagram" />
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -449,6 +472,7 @@
           <EntitySetMapping Name="T_ProductOrder">
             <EntityTypeMapping TypeName="SZ_BuyerModel.T_ProductOrder">
               <MappingFragment StoreEntitySet="T_ProductOrder">
+                <ScalarProperty Name="F_ProductName" ColumnName="F_ProductName" />
                 <ScalarProperty Name="F_ID" ColumnName="F_ID" />
                 <ScalarProperty Name="F_Model" ColumnName="F_Model" />
                 <ScalarProperty Name="F_UnitID" ColumnName="F_UnitID" />
@@ -495,6 +519,17 @@
               <MappingFragment StoreEntitySet="T_Unit">
                 <ScalarProperty Name="F_ID" ColumnName="F_ID" />
                 <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SZ_BuyerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

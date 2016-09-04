@@ -4,34 +4,69 @@
 }
 
 <script>
-    $("#btnSubmit").click(function () {
-        var strUserName = $('#txt_UserName').val();
-        var strPassword = $('#txt_Password').val();
-        var data =
-        {
-            strUserName: strUserName,
-            strPassword: strPassword
-        }
+    $(function () {
+        var option = "";
+                $.get("/HotelReport/PageLoad", function (result)
+                {
+                    $.each(result.data.ProviderItem, function (i, n) {
+                        option += "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
+                    });
+                    $("#sel_Provider").append(option);
 
-        $.post("/Home/LoginSys", data, function (returnData) {
-            alert(returnData.RetStatus);
-            if (returnData.RetStatus == "成功") {
-                window.location.href = "/MainFrm/MainFrm";
+                    $.each(result.data.UnitItem, function (i, n) {
+                        option = "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
+                    });
+                    $("#sel_Unit").append(option);
+                    
+                });
+
+                $("#btnSubmit").click(function () {
+                    var strProductName = $('#txt_ProductName').val();
+                    var strModel = $('#txt_Model').val();
+                    var strUnit = $('#sel_Unit option:selected').val();  //$('#test option:selected').val();
+                    var strPrice = $('#txt_Price').val();
+                    var strBrandName = $('#txt_BrandName').val();
+                    var strDate = $('#txt_Date').val();
+                    var strDeliveryPlace = $('#txt_DeliveryPlace').val();
+                    var strRemark = $('#txt_Remark').val();
+                    var strProvider = $('#sel_Provider option:selected').val();
+                    var data =
+                    {
+                        strProductName: strProductName,
+                        strModel: strModel,
+                        strUnit: strUnit,
+                        strPrice: strPrice,
+                        strBrandName: strBrandName,
+                        strDate: strDate,
+                        strDeliveryPlace: strDeliveryPlace,
+                        strRemark: strRemark,
+                        strProvider: strProvider
+                    }
+
+                    $.post("/HotelReport/HotelReportAdd", data, function (returnData) {
+                        alert(returnData.RetStatus);
+                        if (returnData.RetStatus == "采购单录入成功") {
+                            window.location.href = "/MainFrm/MainFrm";
+                        }
+                    });
+
+                });
             }
-        });
+        );
 
-    });
+
+   
 </script>
 <h2>采购单录入</h2>
 <div><label>商品名称:</label><input id="txt_ProductName" type="text" value="" /> </div>
 <div><label>规    格:</label><input id="txt_Model" type="text" value="" /> </div>
-<div><label>单    位:</label><input id="txt_Unit" type="text" value="" /> </div>
+<div><label>单    位:</label><select id="sel_Unit"></select> </div>
 <div><label>单    价:</label><input id="txt_Price" type="text" value="" /> </div>
 <div><label>品    牌:</label><input id="txt_BrandName" type="text" value="" /> </div>
 <div><label>日    期:</label><input id="txt_Date" type="text" value="" /> </div>
 <div><label>送货地点:</label><input id="txt_DeliveryPlace" type="text" value="" /> </div>
 <div><label>备    注:</label><input id="txt_ProductName" type="text" value="" /> </div>
-<div><label>供 应 商:</label><input id="txt_ProductName" type="text" value="" /> </div>
+<div><label>供 应 商:</label><select id="sel_Provider"></select></div>
 <div><span id="btnSubmit">提交</span><span>返回主页面</span></div>
 
 

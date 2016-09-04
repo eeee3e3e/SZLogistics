@@ -20,6 +20,7 @@
         <AssociationConnector Association="SZ_BuyerModel.FK_T_ProductOrder_T_Unit" ManuallyRouted="false" />
         <AssociationConnector Association="SZ_BuyerModel.FK_T_PUserInfo_T_ProviderInfo" ManuallyRouted="false" />
         <AssociationConnector Association="SZ_BuyerModel.FK_T_PUserInfo_T_PUserType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SZ_BuyerModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,6 +24,7 @@ namespace SZLogisiticsDTO
         public string F_Remark { get; set; }
         public Nullable<int> F_ProviderID { get; set; }
         public Nullable<int> F_HotelID { get; set; }
+        public string F_ProductName { get; set; }
     
         public virtual T_HotelInfo T_HotelInfo { get; set; }
         public virtual T_ProviderInfo T_ProviderInfo { get; set; }

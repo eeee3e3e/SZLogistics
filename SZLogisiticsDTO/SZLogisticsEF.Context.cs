@@ -33,5 +33,6 @@ namespace SZLogisiticsDTO
         public virtual DbSet<T_PUserInfo> T_PUserInfo { get; set; }
         public virtual DbSet<T_PUserType> T_PUserType { get; set; }
         public virtual DbSet<T_Unit> T_Unit { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -17,11 +17,12 @@ namespace SZLogistics.Controllers
         public ActionResult LoginSys(string strUserName, string strPassword)
         {
 
-            ReturnValue rv = new ReturnValue();
+            ReturnValue<string> rv = new ReturnValue<string>();
             SZLogisiticsDTO.SZ_BuyerEntities  SzBuyerEntities= new SZLogisiticsDTO.SZ_BuyerEntities();
             var cls = (from UsObj in SzBuyerEntities.T_HUserInfo
                        where UsObj.F_UserName == strUserName 
                        select UsObj);
+            rv.data = "Status:OK";
             rv.RetStatus = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
             rv.RetValue = cls.Count<SZLogisiticsDTO.T_HUserInfo>() == 0 ? "失败" : "成功";
             return Json(rv,JsonRequestBehavior.AllowGet);
