@@ -9,30 +9,16 @@
         $(document).ready(
             function () {
 
-                var option = ""; 
-                $.post("/HotelReport/PageLoad", function (DataRet) {
-                    var result = $.parseJSON(DataRet);
-                    $.each(result.data.ProviderItem, function (i, n) {
-                        option += "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
-                    });
-                    $("#sel_Provider").append(option);
-
-                    $.each(result.data.UnitItem, function (i, n) {
-                        option = "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
-                    });
-                    $("#sel_Unit").append(option);
-
-                });
-
                 $("#btnLogin").click(function ()
                 {
                     var strUserName = $('#txt_UserName').val();
                     var strPassword = $('#txt_Password').val();
-                    var strType=""
+                    var strUserType = $('#sel_UserType').val();
                     var data =
                     {
                         strUserName: strUserName,
-                        strPassword: strPassword
+                        strPassword: strPassword,
+                        strUserType: strUserType
                     }
 
                     $.post("/Home/LoginSys",data, function(returnData) 
@@ -46,23 +32,6 @@
             
                 });
 
-                    //$.ajax({
-                    //    type: 'post',
-                    //    url: '/Home/LoginSys',//路径为添加方法
-                    //    data: 'strUserName=' + strUserName + '&strPassword=' + strPassword,//参数的个数和名字要和方法的名字保持一致
-                    //    success: function (ReturnValue)//返回的是Json类型的
-                    //    {
-                    //        $('#window').dialog("close");
-                    //        //判断是否成功
-                    //        if (ReturnValue.result == "true") {
-                    //            $('#btn_close').click();
-                    //            alert('恭喜你，修改成功！');
-                    //        } else {
-                    //            alert('抱歉，修改失败！');
-                    //        }
-                    //    }
-                    //});
-
            });
     </script>
 </div>
@@ -75,7 +44,8 @@
 </div>
 <div>
     <select id="sel_UserType">
-
+        <option value="1">酒店用户</option>
+        <option value="2">采购商</option>
     </select>
 </div>
 <div>
