@@ -8,6 +8,22 @@
     <script>
         $(document).ready(
             function () {
+
+                var option = ""; 
+                $.post("/HotelReport/PageLoad", function (DataRet) {
+                    var result = $.parseJSON(DataRet);
+                    $.each(result.data.ProviderItem, function (i, n) {
+                        option += "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
+                    });
+                    $("#sel_Provider").append(option);
+
+                    $.each(result.data.UnitItem, function (i, n) {
+                        option = "<option value=" + n.F_ID + ">" + n.F_Name + "</option>";
+                    });
+                    $("#sel_Unit").append(option);
+
+                });
+
                 $("#btnLogin").click(function ()
                 {
                     var strUserName = $('#txt_UserName').val();
