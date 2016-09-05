@@ -12,6 +12,7 @@
                 {
                     var strUserName = $('#txt_UserName').val();
                     var strPassword = $('#txt_Password').val();
+                    var strType=""
                     var data =
                     {
                         strUserName: strUserName,
@@ -55,6 +56,11 @@
 </div>
 <div>
     <label>密  码: </label> <input id="txt_Password" type="password" value="" />
+</div>
+<div>
+    <select id="sel_UserType">
+
+    </select>
 </div>
 <div>
     <span id="btnLogin">登录</span><span id="btnReset">重置</span>
