@@ -169,9 +169,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelBillController.cs" />
     <Compile Include="Controllers\HotelReportController.cs" />
     <Compile Include="Controllers\MainFrmController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PMainFrmController.cs" />
     <Compile Include="Controllers\ProviderReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -309,6 +311,8 @@
     <Content Include="Views\HotelReport\HotelReport.cshtml" />
     <Content Include="Views\MainFrm\MainFrm.cshtml" />
     <Content Include="Views\ProviderReport\ProviderReport.cshtml" />
+    <Content Include="Views\PMainFrm\PMainFrm.cshtml" />
+    <Content Include="Views\HotelBill\HotelBill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
