@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "ProviderReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>供应商信息列表</h2>
+<script>
+    $(document).ready(
+            function () {
+                var data = { strConn: "" };
+                $.post("/ProviderReport/PageLoad",data, function (DataRet) {
+                    var result = $.parseJSON(DataRet);
+                    var strTable = "";
+//                    ProductName
+//:
+//                        "而且"
+//                    ProviderName
+//:
+//                        "鹏程集团"
+//                    RetDate
+//:
+//                        "2018-08-12"
+                    $.each(result.data, function (i, n) {
+                        strTable += "<div>" + "ID:" + (i+1) + "</div>";
+                        strTable += "<div>" + "商品名称:" + n.ProductName + "</div>";
+                        strTable += "<div>" + "供应商名称:" + n.ProviderName + "</div>";
+                        strTable += "<div>" + "发布日期:" + n.RetDate + "</div>";
+                        strTable += "<div style='height:5px'><div>"
+                    });
+                    $("#ProviderReports").html(strTable);
+
+
+                });
+
+                $("#btn_Submit").click(function () {
+                    var data = { strConn: $("#txt_ProviderName").val() };
+                    $.post("/ProviderReport/PageLoad", data, function (DataRet) {
+                        var result = $.parseJSON(DataRet);
+                        var strTable = "";
+                        //                    ProductName
+                        //:
+                        //                        "而且"
+                        //                    ProviderName
+                        //:
+                        //                        "鹏程集团"
+                        //                    RetDate
+                        //:
+                        //                        "2018-08-12"
+                        $.each(result.data, function (i, n) {
+                            strTable += "<div>" + "ID:" + (i + 1) + "</div>";
+                            strTable += "<div>" + "商品名称:" + n.ProductName + "</div>";
+                            strTable += "<div>" + "供应商名称:" + n.ProviderName + "</div>";
+                            strTable += "<div>" + "发布日期:" + n.RetDate + "</div>";
+                            strTable += "<div style='height:5px'><div>"
+                        });
+                        $("#ProviderReports").html(strTable);
+
+
+                    });
+                });
+            });
+</script>
+
+
+
+<div>
+    <label id="lb_ProviderName">供应商名称：</label><input id="txt_ProviderName" /> <input id="btn_Submit" type="button" value="查询"/>
+    @*默认显示所有供应商已经确认的信息*@
+    <div id="ProviderReports" style="overflow:scroll">
+
+    </div>
+
+</div>
+
