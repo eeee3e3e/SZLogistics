@@ -171,6 +171,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelBillController.cs" />
     <Compile Include="Controllers\HotelReportController.cs" />
+    <Compile Include="Controllers\HReportDetailController.cs" />
     <Compile Include="Controllers\MainFrmController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PMainFrmController.cs" />
@@ -313,6 +314,7 @@
     <Content Include="Views\ProviderReport\ProviderReport.cshtml" />
     <Content Include="Views\PMainFrm\PMainFrm.cshtml" />
     <Content Include="Views\HotelBill\HotelBill.cshtml" />
+    <Content Include="Views\HReportDetail\HReportDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

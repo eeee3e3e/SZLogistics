@@ -13,6 +13,8 @@
                 {
                     var strUserName = $('#txt_UserName').val();
                     var strPassword = $('#txt_Password').val();
+                    localStorage["lsUserName"] = strUserName;
+                    localStorage["lsPassword"] = strPassword;
                     strUserType = $('#sel_UserType').val();
                     var data =
                     {

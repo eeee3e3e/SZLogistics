@@ -7,6 +7,12 @@
 
 
 <script>
+    function ReportDetail(ReportID)
+    {
+        localStorage.setItem("ReportID", ReportID);
+        window.location.href = "/HReportDetail/HReportDetail";
+    }
+
     $(document).ready(
             function () {
                 var data = { strConn: "" };
@@ -14,11 +20,13 @@
                     var result = $.parseJSON(DataRet);
                     var strTable = "";
                     $.each(result.data, function (i, n) {
+                        strTable += "<div onclick=\"ReportDetail(" + n.ReportID + ")\">";
                         strTable += "<div>" + "ID:" + (i+1) + "</div>";
                         strTable += "<div>" + "商品名称:" + n.ProductName + "</div>";
                         strTable += "<div>" + "酒店名称:" + n.HotelName + "</div>";
                         strTable += "<div>" + "发布日期:" + n.RetDate + "</div>";
-                        strTable += "<div style='height:5px'><div>"
+                        strTable += "<div style='height:5px'><div>";
+                        strTable += "</div>";
                     });
                     $("#HotelBills").html(strTable);
 
@@ -30,21 +38,15 @@
                     $.post("/HotelBill/PageLoad", data, function (DataRet) {
                         var result = $.parseJSON(DataRet);
                         var strTable = "";
-                        //                    ProductName
-                        //:
-                        //                        "而且"
-                        //                    ProviderName
-                        //:
-                        //                        "鹏程集团"
-                        //                    RetDate
-                        //:
-                        //                        "2018-08-12"
+                         
                         $.each(result.data, function (i, n) {
+                            strTable += "<div onclick=\"ReportDetail(" + n.ReportID + ")\">";
                             strTable += "<div>" + "ID:" + (i + 1) + "</div>";
                             strTable += "<div>" + "商品名称:" + n.ProductName + "</div>";
                             strTable += "<div>" + "酒店名称:" + n.HotelName + "</div>";
                             strTable += "<div>" + "发布日期:" + n.RetDate + "</div>";
-                            strTable += "<div style='height:5px'><div>"
+                            strTable += "<div style='height:5px'><div>";
+                            strTable += "</div>";
                         });
                         $("#HotelBills").html(strTable);
 
